@@ -1,0 +1,57 @@
+//JSTEP01  EXEC PGM=IGYCRCTL,REGION=0M,PARM=APOST                               
+         //*                                                                             
+         //*  The following DD card deletes an existing PDSE if it already               
+         //*  exists. If it does not exist, the data set is first allocated              
+         //*  and then immediately deleted.                                              
+         //*                                                                             
+       3 //STEPLIB  DD DSN=IGY630.SIGYCOMP,DISP=SHR                                      
+         //*                                                                             
+       4 //SYSLIN   DD DSN=&&OBJMOD,                                                     
+         //            SPACE=(CYL,(1,1)),                                                
+         //            DISP=(MOD,PASS)                                                   
+         //*                                                                             
+       5 //SYSIN    DD *                                                                 
+         //*                                                                             
+       6 //SYSPRINT DD SYSOUT=*                                                          
+         //*                                                                             
+       7 //SYSUT1   DD SPACE=(CYL,(1,1))                                                 
+       8 //SYSUT2   DD SPACE=(CYL,(1,1))                                                 
+       9 //SYSUT3   DD SPACE=(CYL,(1,1))                                                 
+      10 //SYSUT4   DD SPACE=(CYL,(1,1))                                                 
+      11 //SYSUT5   DD SPACE=(CYL,(1,1))                                                 
+      12 //SYSUT6   DD SPACE=(CYL,(1,1))                                                 
+      13 //SYSUT7   DD SPACE=(CYL,(1,1))                                                 
+      14 //SYSUT8   DD SPACE=(CYL,(1,1))                                                 
+      15 //SYSUT9   DD SPACE=(CYL,(1,1))                                                 
+      16 //SYSUT10  DD SPACE=(CYL,(1,1))                                                 
+      17 //SYSUT11  DD SPACE=(CYL,(1,1))                                                 
+      18 //SYSUT12  DD SPACE=(CYL,(1,1))                                                 
+      19 //SYSUT13  DD SPACE=(CYL,(1,1))                                                 
+      20 //SYSUT14  DD SPACE=(CYL,(1,1))                                                 
+      21 //SYSUT15  DD SPACE=(CYL,(1,1))                                                 
+         //*                                                                             
+      22 //SYSMDECK DD SPACE=(CYL,(1,1))                                                 
+         //*                                                                             
+      23 //JSTEP02  EXEC PGM=HEWL                                                        
+         //*                                                                             
+      24 //SYSLIB   DD DSN=CEE.SCEELKED,DISP=SHR                                         
+         //*                                                                             
+      25 //SYSLMOD  DD DSN=KC03E60.CSCI465.LOADLIB(COBOL3),                              
+         //            SPACE=(1024,(50,20,1)),DSNTYPE=LIBRARY,                           
+         //            DISP=(MOD,KEEP,KEEP)                                              
+         //*                                                                             
+      26 //SYSLIN   DD DSN=&&OBJMOD,                                                     
+         //            DISP=(OLD,DELETE)                                                 
+         //*                                                                             
+      27 //SYSPRINT DD SYSOUT=*                                                          
+         //*                                                                             
+      28 //JSTEP03  EXEC PGM=COBOL3                                                      
+         //*                                                                             
+      29 //STEPLIB  DD DSN=KC03E60.CSCI465.LOADLIB,DISP=SHR                              
+         //*                                                                             
+      30 //INDATA   DD DSN=KC02322.CSCI465.ASNDATA(ASN3DATA),DISP=SHR                    
+         //*                                                                             
+      31 //RPTDATA  DD SYSOUT=*                                                          
+         //*                                                                             
+      32 //SYSDUMP  DD SYSOUT=*                                                          
+      33 //                                                                              
